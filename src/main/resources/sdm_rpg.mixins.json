@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sdm.sdm_rpg.core.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "sdm_rpg.refmap.json",
+  "mixins": [
+    "entity.CreeperMixin",
+    "entity.LivinEntityMixin",
+    "world.MixinServerLevel"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
