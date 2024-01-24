@@ -39,8 +39,8 @@ public class CommonConfig {
         BUILDER.comment("The story of mobs being killed by the player's tamed animals");
         HISTORY_PETS_KILL_TIME = BUILDER.define("PETS_KILL", 50);
 
-        BUILDER.comment("История использованных предметов во время битвы");
-        BUILDER.comment("The history of the items used during the battle");
+        BUILDER.comment("История использованных предметов");
+        BUILDER.comment("The history of the items used");
         HISTORY_ITEMS_USE_TIME = BUILDER.define("ITEMS_USE", 50);
 
         BUILDER.comment("История использования тотемов бессмертия во время битвы");

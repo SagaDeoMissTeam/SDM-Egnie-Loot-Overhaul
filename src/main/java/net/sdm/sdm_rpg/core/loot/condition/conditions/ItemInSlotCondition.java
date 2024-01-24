@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -13,16 +14,18 @@ import net.sdm.sdm_rpg.core.utils.snbt.NBTUtils;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.ItemInSlot")
+@Document("mods/lootoverhaul/loot/condition/ItemInSlotCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.ItemInSlotCondition")
 public class ItemInSlotCondition extends LootCondition {
 
     public ItemStack stack;
     public int slot;
     public ItemInSlotCondition(){}
     @ZenCodeType.Constructor
-    public ItemInSlotCondition(ItemStack stack, int slot, ConditionSide side, LootProperty property){
+    public ItemInSlotCondition(ItemStack stack, int slot, LootProperty property){
         super(property,ConditionSide.PLAYER);
         this.stack = stack;
+        this.slot = slot;
     }
     @Override
     public ConditionsList getType() {

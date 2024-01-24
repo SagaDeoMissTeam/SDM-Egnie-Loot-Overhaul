@@ -12,9 +12,9 @@ import net.sdm.sdm_rpg.core.loot.condition.integration.scalingheal.ScaleDifficul
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@Document("mods/sdmrpg/loot/condition/basic/ConditionsList")
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.basic.ConditionsList")
-@BracketEnum("sdmrpg:conditions")
+@Document("mods/lootoverhaul/loot/condition/basic/ConditionsList")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.basic.ConditionsList")
+@BracketEnum("lootoverhaul:conditions")
 public enum ConditionsList {
     Achievement(AchievementCondition.class),
     ArmorEquipment(ArmorEquipmentCondition.class),

@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
@@ -16,7 +17,8 @@ import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.PlayerDeadCondition")
+@Document("mods/lootoverhaul/loot/condition/PlayerDeadCountCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.PlayerDeadCountCondition")
 public class PlayerDeadCountCondition extends LootCondition {
 
     public int max = Integer.MAX_VALUE;
@@ -103,7 +105,7 @@ public class PlayerDeadCountCondition extends LootCondition {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         if(nbt.contains("min")) min = nbt.getInt("min");
-        if(nbt.contains("max")) min = nbt.getInt("max");
+        if(nbt.contains("max")) max = nbt.getInt("max");
         super.deserializeNBT(nbt);
     }
     @Override

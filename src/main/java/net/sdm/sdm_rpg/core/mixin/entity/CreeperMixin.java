@@ -1,8 +1,6 @@
 package net.sdm.sdm_rpg.core.mixin.entity;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraftforge.common.MinecraftForge;
 import net.sdm.sdm_rpg.core.data.ISDMDataHelper;
@@ -26,11 +24,11 @@ public class CreeperMixin {
         SDMLevelSavedData data = ((ISDMDataHelper)level).sdm$saveData();
         if(!data.getData().contains("creeperDetonation")){
             data.getData().putInt("creeperDetonation", 1);
-            LevelInfo.creeperDetonation = 1;
+            LevelInfo.countCreeperDetonation = 1;
         }
         else {
             data.getData().putInt("creeperDetonation", data.getData().getInt("creeperDetonation")+1);
-            LevelInfo.creeperDetonation++;
+            LevelInfo.countCreeperDetonation++;
         }
 
         MinecraftForge.EVENT_BUS.register(new ExplodeCreeperEvent((Creeper)(Object)this, this.explosionRadius, LevelInfo.INSTANCE));

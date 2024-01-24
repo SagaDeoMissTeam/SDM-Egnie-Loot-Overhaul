@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.sdm.sdm_rpg.core.loot.LootProperty;
@@ -11,7 +12,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntityRideCondition")
+@Document("mods/lootoverhaul/loot/condition/EntityRideCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntityRideCondition")
 public class EntityRideCondition extends LootCondition {
     public EntityRideCondition(){}
     public EntityRideCondition(LootProperty property){

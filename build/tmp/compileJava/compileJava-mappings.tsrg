@@ -1,0 +1,14 @@
+net/sdm/sdm_rpg/core/mixin/entity/CreeperMixin explosionRadius f_32272_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin hookedIn f_37094_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin nibble f_37089_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin luck f_37096_
+net/sdm/sdm_rpg/core/mixin/LootTableMixin pools f_79109_
+net/sdm/sdm_rpg/core/mixin/block/BlockBehaviourMixin getLootTable ()Lnet/minecraft/resources/ResourceLocation; m_60589_
+net/sdm/sdm_rpg/core/mixin/entity/LivinEntityMixin getLootTable ()Lnet/minecraft/resources/ResourceLocation; m_5743_
+net/sdm/sdm_rpg/core/mixin/entity/LivinEntityMixin remove (Lnet/minecraft/world/entity/Entity$RemovalReason;)V m_142687_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin getPlayerOwner ()Lnet/minecraft/world/entity/player/Player; m_37168_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin shouldStopFishing (Lnet/minecraft/world/entity/player/Player;)Z m_37136_
+net/sdm/sdm_rpg/core/mixin/FishingHookMixin pullEntity (Lnet/minecraft/world/entity/Entity;)V m_150155_
+net/sdm/sdm_rpg/core/mixin/LootTableMixin getRandomItemsRaw (Lnet/minecraft/world/level/storage/loot/LootContext;Ljava/util/function/Consumer;)V m_79131_
+net/sdm/sdm_rpg/core/mixin/world/MixinServerLevel getDataStorage ()Lnet/minecraft/world/level/storage/DimensionDataStorage; m_8895_
+net/sdm/sdm_rpg/core/mixin/world/MixinServerLevel getServer ()Lnet/minecraft/server/MinecraftServer; m_7654_

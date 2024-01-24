@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -9,36 +10,78 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sdm.sdm_rpg.core.loot.LootProperty;
 import net.sdm.sdm_rpg.core.loot.condition.basic.ConditionsList;
 import net.sdm.sdm_rpg.core.loot.condition.basic.LootCondition;
+import net.sdm.sdm_rpg.core.loot.condition.property.*;
 import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.PlayerCountOnThisDimensionCondition")
+@Document("mods/lootoverhaul/loot/condition/PlayerCountOnThisDimensionCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.PlayerCountOnThisDimensionCondition")
 public class PlayerCountOnThisDimensionCondition extends LootCondition {
 
     public ResourceLocation dimension;
-    public int count;
-    public boolean isCanBeMore = false;
-    public PlayerCountOnThisDimensionCondition(){}
-    @ZenCodeType.Constructor
-    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension, int count, LootProperty property){
-        super(property, ConditionSide.PLAYER);
-        this.dimension= dimension;
-        this.count = count;
-    }
-    @ZenCodeType.Constructor
-    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension, int count, boolean isCanBeMore, LootProperty property){
-        super(property, ConditionSide.PLAYER);
-        this.dimension= dimension;
-        this.count = count;
-        this.isCanBeMore = isCanBeMore;
+
+    public int max = Integer.MAX_VALUE;
+    public int min = Integer.MAX_VALUE;
+    public PlayerCountOnThisDimensionCondition(){
+
     }
 
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,int num, LootProperty property){
+        this(dimension,new IntProperty(num), property);
+    }
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,int min, int max, LootProperty property){
+        this(dimension,new IntRangeProperty(min,max), property);
+    }
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,double num, LootProperty property){
+        this(dimension,new DoubleProperty(num), property);
+    }
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,double min, double max, LootProperty property){
+        this(dimension,new DoubleRangeProperty(min,max), property);
+    }
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,float num, LootProperty property){
+        this(dimension,new FloatProperty(num), property);
+    }
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension,float min, float max, LootProperty property){
+        this(dimension,new FloatRangeProperty(min,max), property);
+    }
+
+    @ZenCodeType.Constructor
+    public PlayerCountOnThisDimensionCondition(ResourceLocation dimension, INumProperty pr, LootProperty property){
+        super(property, ConditionSide.PLAYER);
+        if(pr instanceof IntProperty propertyInt){
+            max = propertyInt.num;
+        }
+        else if(pr instanceof IntRangeProperty propertyRange){
+            min = propertyRange.min;
+            max = propertyRange.max;
+        }
+        else if(pr instanceof FloatProperty single){
+            max = (int) single.num;
+        }
+        else if(pr instanceof FloatRangeProperty single){
+            max = (int) single.max;
+            min = (int) single.min;
+        }
+        else if(pr instanceof DoubleProperty single){
+            max = (int) single.num;
+        }
+        else if(pr instanceof DoubleRangeProperty single){
+            max = (int) single.max;
+            min = (int) single.min;
+        }
+        this.dimension = dimension;
+    }
     @Override
     public ConditionsList getType() {
         return ConditionsList.PlayerCountOnThisDimension;
@@ -52,7 +95,13 @@ public class PlayerCountOnThisDimensionCondition extends LootCondition {
             for(ServerPlayer d2 : player.level().getServer().getPlayerList().getPlayers()){
                 if(d2.level() == d1.get(dimension)) i++;
             }
-            return isCanBeMore ? i >= count : i == count;
+
+            if(min == Integer.MAX_VALUE && max != Integer.MAX_VALUE){
+                return i == max;
+            }
+            if(min != Integer.MAX_VALUE && max != Integer.MAX_VALUE){
+                return i >= min || i <= max;
+            }
         }
         return super.isConditionSuccess(entity);
     }
@@ -61,8 +110,8 @@ public class PlayerCountOnThisDimensionCondition extends LootCondition {
     public CompoundTag serializeNBT() {
         CompoundTag nbt = super.serializeNBT();
         nbt.putString("dimension", dimension.toString());
-        nbt.putInt("count", count);
-        nbt.putBoolean("isCanBeMore", isCanBeMore);
+        if(min != Integer.MAX_VALUE) nbt.putInt("min", min);
+        if(max != Integer.MAX_VALUE) nbt.putInt("max", max);
         return nbt;
     }
 
@@ -70,7 +119,7 @@ public class PlayerCountOnThisDimensionCondition extends LootCondition {
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
         dimension = new ResourceLocation(nbt.getString("dimension"));
-        count = nbt.getInt("count");
-        isCanBeMore = nbt.getBoolean("isCanBeMore");
+        if(nbt.contains("min")) min = nbt.getInt("min");
+        if(nbt.contains("max")) max = nbt.getInt("max");
     }
 }

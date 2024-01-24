@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -14,16 +15,23 @@ import net.sdm.sdm_rpg.core.loot.LootProperty;
 import net.sdm.sdm_rpg.core.loot.condition.basic.ConditionsList;
 import net.sdm.sdm_rpg.core.loot.condition.basic.LootCondition;
 import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
+import net.sdm.sdm_rpg.core.utils.snbt.NBTUtils;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.ArrayList;
 import java.util.List;
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntityHasEffect")
+@Document("mods/lootoverhaul/loot/condition/EntityHasEffectCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntityHasEffectCondition")
 public class EntityHasEffectCondition extends LootCondition {
 
     public List<MobEffect> effects = new ArrayList<>();
     public EntityHasEffectCondition(){}
+    @ZenCodeType.Constructor
+    public EntityHasEffectCondition(MobEffect effects, ConditionSide side, LootProperty property){
+        super(property, side);
+        this.effects.add(effects);
+    }
     @ZenCodeType.Constructor
     public EntityHasEffectCondition(List<MobEffect> effects, ConditionSide side, LootProperty property){
         super(property, side);
@@ -57,7 +65,7 @@ public class EntityHasEffectCondition extends LootCondition {
         for(int i =0; i < effects.size(); i++){
             CompoundTag effectTag = new CompoundTag();
             MobEffect effect = effects.get(i);
-            effectTag.putString("effectID", effect.getDescriptionId());
+            NBTUtils.writeResourceLocation(effectTag, "effectID", ForgeRegistries.MOB_EFFECTS.getKey(effect));
             tags.add(i, effectTag);
         }
         nbt.put("effects", tags);

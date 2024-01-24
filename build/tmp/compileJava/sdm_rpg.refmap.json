@@ -1,0 +1,50 @@
+{
+  "mappings": {
+    "net/sdm/sdm_rpg/core/mixin/entity/LivinEntityMixin": {
+      "dropFromLootTable": "Lnet/minecraft/world/entity/LivingEntity;m_7625_(Lnet/minecraft/world/damagesource/DamageSource;Z)V"
+    },
+    "net/sdm/sdm_rpg/core/mixin/LootTableMixin": {
+      "getRandomItems(Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;": "Lnet/minecraft/world/level/storage/loot/LootTable;m_230922_(Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;",
+      "fill": "Lnet/minecraft/world/level/storage/loot/LootTable;m_287188_(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/storage/loot/LootParams;J)V"
+    },
+    "net/sdm/sdm_rpg/core/mixin/FishingHookMixin": {
+      "retrieve": "Lnet/minecraft/world/entity/projectile/FishingHook;m_37156_(Lnet/minecraft/world/item/ItemStack;)I"
+    },
+    "net/sdm/sdm_rpg/core/mixin/entity/CreeperMixin": {
+      "Lnet/minecraft/world/entity/monster/Creeper;spawnLingeringCloud()V": "Lnet/minecraft/world/entity/monster/Creeper;m_32316_()V",
+      "explodeCreeper": "Lnet/minecraft/world/entity/monster/Creeper;m_32315_()V"
+    },
+    "net/sdm/sdm_rpg/core/mixin/world/MixinServerLevel": {
+      "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V": "Lnet/minecraft/server/level/ServerLevel;m_8615_(J)V",
+      "tick": "Lnet/minecraft/server/level/ServerLevel;m_8793_(Ljava/util/function/BooleanSupplier;)V"
+    },
+    "net/sdm/sdm_rpg/core/mixin/block/BlockBehaviourMixin": {
+      "getDrops": "Lnet/minecraft/world/level/block/state/BlockBehaviour;m_49635_(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/storage/loot/LootParams$Builder;)Ljava/util/List;"
+    }
+  },
+  "data": {
+    "searge": {
+      "net/sdm/sdm_rpg/core/mixin/entity/LivinEntityMixin": {
+        "dropFromLootTable": "Lnet/minecraft/world/entity/LivingEntity;m_7625_(Lnet/minecraft/world/damagesource/DamageSource;Z)V"
+      },
+      "net/sdm/sdm_rpg/core/mixin/LootTableMixin": {
+        "getRandomItems(Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;": "Lnet/minecraft/world/level/storage/loot/LootTable;m_230922_(Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;",
+        "fill": "Lnet/minecraft/world/level/storage/loot/LootTable;m_287188_(Lnet/minecraft/world/Container;Lnet/minecraft/world/level/storage/loot/LootParams;J)V"
+      },
+      "net/sdm/sdm_rpg/core/mixin/FishingHookMixin": {
+        "retrieve": "Lnet/minecraft/world/entity/projectile/FishingHook;m_37156_(Lnet/minecraft/world/item/ItemStack;)I"
+      },
+      "net/sdm/sdm_rpg/core/mixin/entity/CreeperMixin": {
+        "Lnet/minecraft/world/entity/monster/Creeper;spawnLingeringCloud()V": "Lnet/minecraft/world/entity/monster/Creeper;m_32316_()V",
+        "explodeCreeper": "Lnet/minecraft/world/entity/monster/Creeper;m_32315_()V"
+      },
+      "net/sdm/sdm_rpg/core/mixin/world/MixinServerLevel": {
+        "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V": "Lnet/minecraft/server/level/ServerLevel;m_8615_(J)V",
+        "tick": "Lnet/minecraft/server/level/ServerLevel;m_8793_(Ljava/util/function/BooleanSupplier;)V"
+      },
+      "net/sdm/sdm_rpg/core/mixin/block/BlockBehaviourMixin": {
+        "getDrops": "Lnet/minecraft/world/level/block/state/BlockBehaviour;m_49635_(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/storage/loot/LootParams$Builder;)Ljava/util/List;"
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +15,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.ToolTypeCondition")
+@Document("mods/lootoverhaul/loot/condition/ToolTypeCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.ToolTypeCondition")
 public class ToolTypeCondition extends LootCondition {
     public ItemType type;
     public ToolTypeCondition(){}
@@ -58,13 +60,13 @@ public class ToolTypeCondition extends LootCondition {
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = super.serializeNBT();
-        tag.putString("type", type.name());
+        tag.putString("tireType", type.name());
         return tag;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
-        type = ItemType.valueOf(nbt.getString("type"));
+        type = ItemType.valueOf(nbt.getString("tireType"));
     }
 }

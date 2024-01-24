@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,7 +12,8 @@ import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntityOnAirCondition")
+@Document("mods/lootoverhaul/loot/condition/EntityOnAirCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntityOnAirCondition")
 public class EntityOnAirCondition extends LootCondition {
     public EntityOnAirCondition(){}
     @ZenCodeType.Constructor

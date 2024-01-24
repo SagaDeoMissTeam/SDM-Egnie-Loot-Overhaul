@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +16,8 @@ import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntityTimeInStructureCondition")
+@Document("mods/lootoverhaul/loot/condition/EntityTimeInStructureCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntityTimeInStructureCondition")
 public class EntityTimeInStructureCondition extends LootCondition {
 
     public ResourceLocation structure;
@@ -110,7 +112,7 @@ public class EntityTimeInStructureCondition extends LootCondition {
     public void deserializeNBT(CompoundTag nbt) {
         structure = new ResourceLocation(nbt.getString("structure"));
         if(nbt.contains("min")) min = nbt.getInt("min");
-        if(nbt.contains("max")) min = nbt.getInt("max");
+        if(nbt.contains("max")) max = nbt.getInt("max");
         super.deserializeNBT(nbt);
     }
 

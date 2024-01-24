@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.global;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.eventbus.api.Event;
@@ -11,7 +12,8 @@ import net.sdm.sdm_rpg.core.loot.condition.basic.LootFunction;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.global.NotCondition")
+@Document("mods/lootoverhaul/loot/condition/global/NotCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.global.NotCondition")
 public class NotCondition extends LootFunction {
 
     public LootCondition condition;
@@ -20,6 +22,7 @@ public class NotCondition extends LootFunction {
         super(null);
     }
 
+    @ZenCodeType.Constructor
     public NotCondition(LootCondition condition, LootProperty property){
         super(property);
         this.condition = condition;

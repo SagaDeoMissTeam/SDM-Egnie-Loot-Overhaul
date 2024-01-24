@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import dev.ftb.mods.ftblibrary.snbt.SNBTCompoundTag;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -17,7 +18,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.AchievementCondition")
+@Document("mods/lootoverhaul/loot/condition/AchievementCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.AchievementCondition")
 public class AchievementCondition extends LootCondition {
     public ResourceLocation advancement;
 

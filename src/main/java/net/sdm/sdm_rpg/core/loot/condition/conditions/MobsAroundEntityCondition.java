@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +19,8 @@ import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.MobAround")
+@Document("mods/lootoverhaul/loot/condition/MobsAroundEntityCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.MobsAroundEntityCondition")
 public class MobsAroundEntityCondition extends LootCondition {
     public EntityType<?> entityType;
     public int count;

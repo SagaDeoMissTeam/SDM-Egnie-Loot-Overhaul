@@ -25,6 +25,8 @@ public abstract class LivinEntityMixin {
 
     @Shadow public abstract ResourceLocation getLootTable();
 
+    @Shadow public abstract void remove(Entity.RemovalReason p_276115_);
+
     @Inject(method = "dropFromLootTable", at = @At("HEAD"), cancellable = true)
     protected void sdm$dropFromLootTable(DamageSource damageSource, boolean p_21022_, CallbackInfo ci){
 
@@ -48,6 +50,10 @@ public abstract class LivinEntityMixin {
                             else if (condition.isConditionSuccess((LivingEntity) (Object) this)) success++;
 
                             else if (condition.isConditionSuccess(player)) success++;
+                            else {
+                                if(property.lootResults.isEmpty()) ci.cancel();
+                                return;
+                            }
                     }
                     if(success == property.lootConditionList.size()){
 

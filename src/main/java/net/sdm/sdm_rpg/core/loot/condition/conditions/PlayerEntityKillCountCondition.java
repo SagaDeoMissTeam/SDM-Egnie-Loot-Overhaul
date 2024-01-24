@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,12 +14,14 @@ import net.sdm.sdm_rpg.core.loot.LootProperty;
 import net.sdm.sdm_rpg.core.loot.condition.basic.ConditionsList;
 import net.sdm.sdm_rpg.core.loot.condition.basic.LootCondition;
 import net.sdm.sdm_rpg.core.loot.condition.side.ConditionSide;
+import net.sdm.sdm_rpg.core.utils.snbt.NBTUtils;
 import org.openzen.zencode.java.ZenCodeType;
 
 //количество Убито конкретного моба
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.PlayerEntityKillCountCondition")
+@Document("mods/lootoverhaul/loot/condition/PlayerEntityKillCountCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.PlayerEntityKillCountCondition")
 public class PlayerEntityKillCountCondition extends LootCondition {
 
     public EntityType<?> entityType;
@@ -47,7 +50,7 @@ public class PlayerEntityKillCountCondition extends LootCondition {
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = super.serializeNBT();
-        nbt.putString("entityType", entityType.toString());
+        NBTUtils.writeEntity(nbt,"entityType", entityType);
         nbt.putInt("count", count);
         return nbt;
     }
@@ -55,7 +58,8 @@ public class PlayerEntityKillCountCondition extends LootCondition {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
-        entityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(nbt.getString("entityType")));
+
+        entityType = NBTUtils.readEntity(nbt, "entityType");
         count = nbt.getInt("count");
     }
 }

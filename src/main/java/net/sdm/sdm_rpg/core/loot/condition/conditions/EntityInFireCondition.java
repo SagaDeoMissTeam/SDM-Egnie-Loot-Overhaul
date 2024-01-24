@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +16,8 @@ import org.openzen.zencode.java.ZenCodeType;
 import java.util.List;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntityInFireCondition")
+@Document("mods/lootoverhaul/loot/condition/EntityInFireCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntityInFireCondition")
 public class EntityInFireCondition extends LootCondition {
 
     public EntityInFireCondition(){}

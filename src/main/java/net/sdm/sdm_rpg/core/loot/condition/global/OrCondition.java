@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.global;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -19,7 +20,8 @@ import java.util.List;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.global.OrCondition")
+@Document("mods/lootoverhaul/loot/condition/global/OrCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.global.OrCondition")
 public class OrCondition extends LootFunction {
 
     public List<LootCondition> conditionList = new ArrayList<>();
@@ -28,6 +30,7 @@ public class OrCondition extends LootFunction {
         super(null);
     }
 
+    @ZenCodeType.Constructor
     public OrCondition(List<LootCondition> conditionList, LootProperty property){
         super(property);
         this.conditionList = conditionList;

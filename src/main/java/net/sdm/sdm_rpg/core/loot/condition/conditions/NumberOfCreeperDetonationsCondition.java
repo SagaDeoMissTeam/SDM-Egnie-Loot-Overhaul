@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.sdm.sdm_rpg.core.data.LevelInfo;
@@ -13,7 +14,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.NumberOfCreeperDetonationsCondition")
+@Document("mods/lootoverhaul/loot/condition/NumberOfCreeperDetonationsCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.NumberOfCreeperDetonationsCondition")
 public class NumberOfCreeperDetonationsCondition extends LootCondition {
 
     public int max = Integer.MAX_VALUE;
@@ -82,10 +84,10 @@ public class NumberOfCreeperDetonationsCondition extends LootCondition {
     @Override
     public boolean isConditionSuccess(Entity entity) {
         if(min == Integer.MAX_VALUE && max != Integer.MAX_VALUE){
-            return LevelInfo.creeperDetonation >= max;
+            return LevelInfo.countCreeperDetonation >= max;
         }
         if(min != Integer.MAX_VALUE && max != Integer.MAX_VALUE){
-            return LevelInfo.creeperDetonation >= min || LevelInfo.creeperDetonation <= max;
+            return LevelInfo.countCreeperDetonation >= min || LevelInfo.countCreeperDetonation <= max;
         }
 
         return super.isConditionSuccess(entity);
@@ -103,7 +105,7 @@ public class NumberOfCreeperDetonationsCondition extends LootCondition {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         if(nbt.contains("min")) min = nbt.getInt("min");
-        if(nbt.contains("max")) min = nbt.getInt("max");
+        if(nbt.contains("max")) max = nbt.getInt("max");
         super.deserializeNBT(nbt);
     }
 }

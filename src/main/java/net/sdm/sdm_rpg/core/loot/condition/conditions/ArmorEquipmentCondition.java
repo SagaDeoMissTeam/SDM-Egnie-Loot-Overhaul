@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -19,13 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.ArmorEquipment")
+@Document("mods/lootoverhaul/loot/condition/ArmorEquipmentCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.ArmorEquipmentCondition")
 public class ArmorEquipmentCondition extends LootCondition {
 
     public List<ItemStack> itemStackList = new ArrayList<>();
 
     public ArmorEquipmentCondition(){}
 
+    @ZenCodeType.Constructor
+    public ArmorEquipmentCondition(ItemStack itemStackList, ConditionSide side, LootProperty property){
+        super(property, side);
+        this.itemStackList.add(itemStackList);
+    }
     @ZenCodeType.Constructor
     public ArmorEquipmentCondition(List<ItemStack> itemStackList, ConditionSide side, LootProperty property){
         super(property, side);
@@ -60,7 +67,7 @@ public class ArmorEquipmentCondition extends LootCondition {
         ListTag tags = new ListTag();
         for(int i =0 ; i < itemStackList.size(); i++){
             CompoundTag d1 = new CompoundTag();
-            NBTUtils.writeItem(d1, "item"+i, itemStackList.get(i));
+            NBTUtils.writeItem(d1, "item", itemStackList.get(i));
             tags.add(d1);
         }
         tag.put("items", tags);
@@ -73,7 +80,7 @@ public class ArmorEquipmentCondition extends LootCondition {
         ListTag tags = nbt.getList("items", Tag.TAG_COMPOUND);
         for (int i =0; i < tags.size(); i++){
             CompoundTag d1 = (CompoundTag) tags.get(i);
-            itemStackList.add(NBTUtils.readItem(d1, "item" + i));
+            itemStackList.add(NBTUtils.readItem(d1, "item"));
 
         }
     }

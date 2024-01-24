@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.sdm.sdm_rpg.core.loot.LootProperty;
@@ -11,7 +12,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.RandomNumberCondition")
+@Document("mods/lootoverhaul/loot/condition/RandomNumberCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.RandomNumberCondition")
 public class RandomNumberCondition extends LootCondition {
 
     public int min;

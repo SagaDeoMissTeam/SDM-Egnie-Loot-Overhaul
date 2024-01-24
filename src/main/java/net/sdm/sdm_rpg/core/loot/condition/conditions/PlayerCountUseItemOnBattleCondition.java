@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.PlayerCountUseItemOnBattleCondition")
+@Document("mods/lootoverhaul/loot/condition/PlayerCountUseItemOnBattleCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.PlayerCountUseItemOnBattleCondition")
 public class PlayerCountUseItemOnBattleCondition extends LootCondition {
     public List<ItemStack> itemStackList = new ArrayList<>();
     public int count = Integer.MAX_VALUE;

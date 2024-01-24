@@ -1,22 +1,30 @@
 package net.sdm.sdm_rpg.core.loot.type;
 
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ZenRegister
+@Document("mods/lootoverhaul/loot/condition/type/LootChestType")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.type.LootChestType")
 public class LootEntityType extends LootType {
     public List<EntityType<?>> entityTypeList = new ArrayList<>();
 
     public LootEntityType(){}
+    @ZenCodeType.Constructor
     public LootEntityType(EntityType<?> entityTypeList){
         this.entityTypeList.add(entityTypeList);
     }
+    @ZenCodeType.Constructor
     public LootEntityType(List<EntityType<?>> entityTypeList){
         this.entityTypeList = entityTypeList;
     }

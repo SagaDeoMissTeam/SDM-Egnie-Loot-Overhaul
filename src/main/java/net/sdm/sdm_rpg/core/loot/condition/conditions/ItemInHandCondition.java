@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +16,8 @@ import net.sdm.sdm_rpg.core.utils.snbt.NBTUtils;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.ItemInHand")
+@Document("mods/lootoverhaul/loot/condition/ItemInHandCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.ItemInHandCondition")
 public class ItemInHandCondition extends LootCondition {
 
     public ItemStack stack;

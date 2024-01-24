@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +14,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.EntitySeeSkyCondition")
+@Document("mods/lootoverhaul/loot/condition/EntitySeeSkyCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.EntitySeeSkyCondition")
 public class EntitySeeSkyCondition extends LootCondition {
     public EntitySeeSkyCondition(){}
     @ZenCodeType.Constructor

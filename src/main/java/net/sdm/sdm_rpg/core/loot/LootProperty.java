@@ -1,33 +1,39 @@
 package net.sdm.sdm_rpg.core.loot;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.sdm.sdm_rpg.SDMRPG;
 import net.sdm.sdm_rpg.core.data.DataContainer;
+import net.sdm.sdm_rpg.core.load.LoadType;
 import net.sdm.sdm_rpg.core.loot.condition.basic.LootCondition;
-import net.sdm.sdm_rpg.core.loot.condition.basic.LootResult;
-import net.sdm.sdm_rpg.core.loot.condition.conditions.PlayerTotemUseOnBattleCondition;
 import net.sdm.sdm_rpg.core.loot.result.ILootResult;
 import net.sdm.sdm_rpg.core.loot.type.LootType;
 import net.sdm.sdm_rpg.core.utils.ConditionUtils;
 import org.openzen.zencode.java.ZenCodeType;
 
-import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.LootProperty")
+@Document("mods/lootoverhaul/loot/LootProperty")
+@ZenCodeType.Name("mods.lootoverhaul.loot.LootProperty")
 public class LootProperty implements INBTSerializable<CompoundTag> {
 
+
+    public LoadType loadType = LoadType.NONE;
+    @ZenCodeType.Field
     public LootType type;
+    @ZenCodeType.Field
     public String id;
     public String fileName = "";
+    @ZenCodeType.Field
     public List<ILootResult> lootResults = new ArrayList<>();
+    @ZenCodeType.Field
     public List<LootCondition> lootConditionList = new ArrayList<>();
     public LootProperty(){}
     @ZenCodeType.Constructor
@@ -61,11 +67,31 @@ public class LootProperty implements INBTSerializable<CompoundTag> {
         this.lootResults.add(lootResult);
         return this;
     }
+    @ZenCodeType.Method
+    public LootProperty saveFile(){
+        loadType = LoadType.FILE;
+        return this;
+    }
 
     @ZenCodeType.Method
     public void create(){
+        if(loadType != LoadType.FILE) loadType = LoadType.CRAFTTWEAKER;
         id = ConditionUtils.generateID();
         SDMRPG.REGISTER_ID.add(id);
+
+        if(loadType == LoadType.FILE || loadType == LoadType.NONE)
+            DataContainer.LOOT_FROM_FILE.add(this);
+        else
+            DataContainer.LOOT_FROM_SCRIPTS.add(this);
+
+        DataContainer.LOOT_PROPERTY.add(this);
+    }
+
+    public void createFile(){
+        loadType = LoadType.FILE;
+        id = ConditionUtils.generateID();
+        SDMRPG.REGISTER_ID.add(id);
+        DataContainer.LOOT_FROM_FILE.add(this);
         DataContainer.LOOT_PROPERTY.add(this);
     }
 

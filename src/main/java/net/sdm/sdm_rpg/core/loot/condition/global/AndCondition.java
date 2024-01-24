@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.global;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -18,7 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.global.AndCondition")
+@Document("mods/lootoverhaul/loot/condition/global/AndCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.global.AndCondition")
 public class AndCondition extends LootFunction {
 
     public List<LootCondition> conditionList = new ArrayList<>();

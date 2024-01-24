@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.conditions;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.sdm.sdm_rpg.core.data.LevelInfo;
@@ -13,7 +14,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.PlayerCountSleepingNightsCondition")
+@Document("mods/lootoverhaul/loot/condition/PlayerCountSleepingNightsCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.PlayerCountSleepingNightsCondition")
 public class PlayerCountSleepingNightsCondition extends LootCondition {
 
 
@@ -99,7 +101,7 @@ public class PlayerCountSleepingNightsCondition extends LootCondition {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         if(nbt.contains("min")) min = nbt.getInt("min");
-        if(nbt.contains("max")) min = nbt.getInt("max");
+        if(nbt.contains("max")) max = nbt.getInt("max");
         super.deserializeNBT(nbt);
     }
     @Override

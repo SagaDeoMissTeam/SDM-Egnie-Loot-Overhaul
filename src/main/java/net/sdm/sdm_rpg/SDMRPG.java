@@ -1,10 +1,12 @@
 package net.sdm.sdm_rpg;
 
+import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
@@ -24,6 +26,7 @@ import net.sdm.sdm_rpg.core.data.parser.FilesParser;
 import net.sdm.sdm_rpg.core.events.minecraft.EntityEvents;
 import net.sdm.sdm_rpg.core.events.minecraft.LevelEvents;
 import net.sdm.sdm_rpg.core.events.minecraft.PlayerEvents;
+import net.sdm.sdm_rpg.core.logger.SDMLogger;
 import net.sdm.sdm_rpg.core.register.SDMRegistries;
 import org.slf4j.Logger;
 
@@ -38,11 +41,12 @@ public class SDMRPG {
         return FMLPaths.CONFIGDIR.get().resolve("sdmrpg/").resolve("sdmrpg.snbt");
     }
     public static final String MODID = "sdm_rpg";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final SDMLogger LOGGER = new SDMLogger("LootOverhaul", Constants.LOG_FILE);
 
     public static List<String> REGISTER_ID = new ArrayList<>();
 
     public SDMRPG() {
+
         createFile();
         ConfigInit.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -53,29 +57,40 @@ public class SDMRPG {
         MinecraftForge.EVENT_BUS.register(EntityEvents.class);
         MinecraftForge.EVENT_BUS.register(PlayerEvents.class);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStartingEvent);
+        MinecraftForge.EVENT_BUS.addListener(this::realodListener);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStoppingEvent);
-
         new LevelInfo().init();
     }
 
+
+    public void realodListener(AddReloadListenerEvent event){
+        event.addListener(new DataContainer());
+    }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));;
 
 
-        SDMTest.init();
+//        SDMTest.init();
     }
 
 
     public void onServerStartingEvent(ServerStartingEvent event){
+        LOGGER.sendInfo("Loading data from file !");
         if(event.getServer().overworld() != null) {
+            LOGGER.sendInfo("Loading level data !");
             ServerLevel level = event.getServer().overworld();
             SDMLevelSavedData data = ((ISDMDataHelper)level).sdm$saveData();
             LevelInfo.deserializeNBT(data.getData());
+            LOGGER.sendInfo("Loaded level data !");
         }
-        DataContainer.readFile();
-
-        LOGGER.info("Registered " + DataContainer.LOOT_PROPERTY.size() + " conditions !");
+//        LOGGER.sendInfo("Loading conditions !");
+//        DataContainer.readFile();
+//        LOGGER.sendInfo("Loaded conditions !");
+//        LOGGER.sendInfo("Registered " + DataContainer.LOOT_PROPERTY.size() + " conditions !");
+//        LOGGER.sendInfo("Registered " +    DataContainer.BLOCKS_PROPERTY.size() + " block conditions !");
+//        LOGGER.sendInfo("Registered " + DataContainer.ENTITY_PROPERTY.size() + " entity conditions !");
+//        LOGGER.sendInfo("Registered " + DataContainer.CHEST_PROPERTY.size() + " chest conditions !");
+//        LOGGER.sendInfo("Registered " + DataContainer.FISH_PROPERTY.size() + " fishing conditions !");
     }
 
     public void onServerStoppingEvent(ServerStoppingEvent event){
@@ -107,6 +122,13 @@ public class SDMRPG {
         }
         if(!Constants.LOG_FOLDER.toFile().exists()){
             Constants.LOG_FOLDER.toFile().mkdirs();
+        }
+        if(!LOGGER.isExist()){
+            LOGGER.createFile();
+        }
+
+        if(LOGGER.isExist()){
+            LOGGER.sendInfo("Thanks for downloading this mod ^_^");
         }
     }
 }

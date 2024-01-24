@@ -1,6 +1,7 @@
 package net.sdm.sdm_rpg.core.loot.condition.basic;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker_annotations.annotations.Document;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -17,7 +18,8 @@ import org.openzen.zencode.java.ZenCodeType;
 import java.util.Arrays;
 
 @ZenRegister
-@ZenCodeType.Name("mods.sdmrpg.loot.condition.basic.LootCondition")
+@Document("mods/lootoverhaul/loot/condition/basic/LootCondition")
+@ZenCodeType.Name("mods.lootoverhaul.loot.condition.basic.LootCondition")
 public class LootCondition implements INBTSerializable<CompoundTag>, ICondition<LootCondition> {
     public int priority = 0;
     public LootProperty parent;
@@ -33,6 +35,10 @@ public class LootCondition implements INBTSerializable<CompoundTag>, ICondition<
     public LootCondition(){
         parent = null;
         this.side = ConditionSide.NONE;
+    }
+
+    public String getError(){
+        return "";
     }
 
     @ZenCodeType.Method
@@ -65,14 +71,14 @@ public class LootCondition implements INBTSerializable<CompoundTag>, ICondition<
         CompoundTag tag = new CompoundTag();
         tag.putString("type", getType().name());
         tag.putString("side", side.name);
-        tag.putInt("priority", priority);
+        //tag.putInt("priority", priority);
         return tag;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         side = nbt.getString("side").contains("player") ? ConditionSide.PLAYER : nbt.getString("side").contains("entity") ? ConditionSide.ENTITY : nbt.getString("side").contains("function") ? ConditionSide.FUNCTION : ConditionSide.NONE;
-        priority = nbt.getInt("priority");
+        //priority = nbt.getInt("priority");
     }
 
     @Override
